@@ -323,3 +323,25 @@ a {
   animation: shimmer 1.5s infinite linear;
   border-radius: 6px;
 }
+
+/* Layout Utilities */
+.container-app {
+  width: 100%;
+  max-width: 630px;
+  /* Instagram Feed Width */
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+@media (min-width: 768px) {
+  .post-grid {
+    gap: 28px;
+    /* Larger gap on desktop profile */
+  }
+}
