@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { Suspense, useState, useRef, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
@@ -17,7 +17,7 @@ import Image from "next/image";
 
 type CreateStep = "select" | "edit" | "share";
 
-export default function CreatePage() {
+function CreateContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const isStory = searchParams.get("type") === "story";
@@ -246,5 +246,30 @@ export default function CreatePage() {
                 )}
             </div>
         </AppLayout>
+    );
+}
+
+function CreateLoading() {
+    return (
+        <AppLayout>
+            <header className="sticky top-0 z-40 bg-black border-b border-[#262626]">
+                <div className="flex items-center justify-between h-11 px-4">
+                    <div className="w-6 h-6" />
+                    <h1 className="font-semibold">New Post</h1>
+                    <div className="w-6" />
+                </div>
+            </header>
+            <div className="flex items-center justify-center h-[50vh]">
+                <div className="animate-spin w-8 h-8 border-2 border-white border-t-transparent rounded-full" />
+            </div>
+        </AppLayout>
+    );
+}
+
+export default function CreatePage() {
+    return (
+        <Suspense fallback={<CreateLoading />}>
+            <CreateContent />
+        </Suspense>
     );
 }
