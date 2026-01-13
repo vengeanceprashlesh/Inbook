@@ -46,25 +46,27 @@ export function StoriesBar({
                 {/* Your Story (Create) */}
                 <button
                     onClick={onCreateStory}
-                    className="flex flex-col items-center gap-1 flex-shrink-0"
+                    className="flex flex-col items-center gap-1.5 flex-shrink-0 animate-scale-in"
+                    style={{ animationDelay: "0ms" }}
                 >
                     <div className="relative">
                         <Avatar src={undefined} alt="Your story" size="lg" />
-                        <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 bg-[#0095f6] rounded-full flex items-center justify-center border-2 border-black">
-                            <Plus size={14} strokeWidth={3} />
+                        <div className="absolute -bottom-0.5 -right-0.5 w-6 h-6 bg-[#0095f6] rounded-full flex items-center justify-center border-[2.5px] border-black">
+                            <Plus size={12} strokeWidth={3} className="text-white" />
                         </div>
                     </div>
-                    <span className="text-xs text-[#f5f5f5] max-w-[66px] truncate">
+                    <span className="text-xs text-[#f5f5f5] max-w-[70px] truncate leading-tight">
                         Your story
                     </span>
                 </button>
 
                 {/* Other users' stories */}
-                {storyGroups.map((group) => (
+                {storyGroups.map((group, index) => (
                     <Link
                         key={group.author._id}
                         href={`/stories/${group.author.username}`}
-                        className="flex flex-col items-center gap-1 flex-shrink-0"
+                        className="flex flex-col items-center gap-1.5 flex-shrink-0 animate-scale-in active:opacity-70 transition-opacity"
+                        style={{ animationDelay: `${(index + 1) * 50}ms` }}
                         onClick={(e) => {
                             if (onStoryClick) {
                                 e.preventDefault();
@@ -79,7 +81,7 @@ export function StoriesBar({
                             hasStory
                             storyViewed={false}
                         />
-                        <span className="text-xs text-[#f5f5f5] max-w-[66px] truncate">
+                        <span className="text-xs text-[#f5f5f5] max-w-[70px] truncate leading-tight">
                             {group.author.username}
                         </span>
                     </Link>
@@ -95,9 +97,9 @@ export function StoriesBarSkeleton() {
         <div className="border-b border-[#262626] bg-black">
             <div className="flex gap-4 px-4 py-4 overflow-x-auto hide-scrollbar">
                 {Array.from({ length: 8 }).map((_, i) => (
-                    <div key={i} className="flex flex-col items-center gap-1 flex-shrink-0">
-                        <div className="w-14 h-14 rounded-full skeleton" />
-                        <div className="w-12 h-2 skeleton" />
+                    <div key={i} className="flex flex-col items-center gap-1.5 flex-shrink-0">
+                        <div className="w-[70px] h-[70px] rounded-full skeleton" />
+                        <div className="w-16 h-2 skeleton" />
                     </div>
                 ))}
             </div>
