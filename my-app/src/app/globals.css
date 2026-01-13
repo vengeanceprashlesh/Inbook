@@ -1,24 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  /* Premium Dark Theme */
+  /* Premium Dark Theme - Cyberpunk/OLED Inspired */
   --background: #000000;
   --foreground: #ffffff;
-  --card: #000000;
-  --card-border: #262626;
-  --muted: #a8a8a8;
+  --card: #09090b;
+  /* Slightly lighter than black for depth */
+  --card-border: rgba(255, 255, 255, 0.08);
+  /* Quieter border */
+  --muted: #a1a1aa;
+
+  /* Vibrant Accents */
   --accent: #0095f6;
   --accent-hover: #1877f2;
-  --danger: #ed4956;
-  --success: #00a400;
-  --glass-bg: rgba(0, 0, 0, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --danger: #ef4444;
+  --success: #10b981;
 
-  /* Instagram Gradient */
-  --gradient-start: #f09433;
-  --gradient-mid: #e6683c;
-  --gradient-end: #dc2743;
-  --gradient-purple: #bc1888;
+  /* Glassmorphism System */
+  --glass-bg: rgba(0, 0, 0, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.03);
+
+  /* Instagram Gradient - More Vibrant */
+  --gradient-start: #ff8a00;
+  --gradient-mid: #e52e71;
+  --gradient-end: #d11d1d;
+  --gradient-purple: #9b2cfa;
 }
 
 @theme inline {
@@ -60,71 +67,94 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   overscroll-behavior-y: none;
-  /* Prevent bounce effect */
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
 }
 
 /* --- Utilities --- */
 
-/* Glassmorphism */
+/* Premium Glassmorphism */
 .glass {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-top: 1px solid var(--glass-border);
 }
 
 .glass-header {
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--glass-border);
 }
 
-/* Custom Gradients */
+/* Custom Gradients & Text */
 .instagram-gradient {
-  background: linear-gradient(45deg,
+  background: linear-gradient(135deg,
       var(--gradient-start) 0%,
-      var(--gradient-mid) 25%,
-      var(--gradient-end) 50%,
+      var(--gradient-mid) 40%,
+      var(--gradient-end) 70%,
       var(--gradient-purple) 100%);
 }
 
 .instagram-gradient-text {
-  background: linear-gradient(45deg,
+  background: linear-gradient(135deg,
       var(--gradient-start) 0%,
-      var(--gradient-mid) 25%,
-      var(--gradient-end) 50%,
+      var(--gradient-mid) 40%,
+      var(--gradient-end) 70%,
       var(--gradient-purple) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  display: inline-block;
+  /* Ensure gradient applies nicely */
 }
 
-/* Story Rings */
+/* Story Rings - Exact Instagram Proportions */
 .story-ring {
   background: linear-gradient(45deg,
-      var(--gradient-start) 0%,
-      var(--gradient-mid) 25%,
-      var(--gradient-end) 50%,
-      var(--gradient-purple) 100%);
+      #ffc600 0%,
+      #ff0040 50%,
+      #d300c5 100%);
   border-radius: 50%;
 }
 
 .story-ring-inner {
   background: var(--background);
-  padding: 2px;
+  padding: 2.5px;
+  /* Visual gap */
   border-radius: 50%;
   display: flex;
-  /* Fix alignment */
   align-items: center;
   justify-content: center;
+  /* Ensure content doesn't bleed */
+  overflow: hidden;
 }
 
 .story-ring-seen {
-  background: #262626;
+  background: #27272a;
+  /* Zinc-800 for seen state */
 }
 
-/* Scrollbars */
+/* Refined Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -134,38 +164,28 @@ body {
   display: none;
 }
 
-/* Animations */
+/* Advanced Animations */
 @keyframes fade-in {
   from {
     opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slide-up {
-  from {
     transform: translateY(10px);
-    opacity: 0;
   }
 
   to {
-    transform: translateY(0);
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
 @keyframes scale-in {
   from {
-    transform: scale(0.95);
     opacity: 0;
+    transform: scale(0.95);
   }
 
   to {
-    transform: scale(1);
     opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -176,12 +196,13 @@ body {
   }
 
   15% {
-    transform: scale(1.2);
+    transform: scale(1.3);
     opacity: 1;
   }
 
+  /* More bounce */
   30% {
-    transform: scale(0.95);
+    transform: scale(0.9);
   }
 
   45% {
@@ -190,6 +211,7 @@ body {
 
   60% {
     transform: scale(1);
+    opacity: 1;
   }
 
   100% {
@@ -198,30 +220,27 @@ body {
   }
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
   }
 }
 
 .animate-fade-in {
-  animation: fade-in 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.animate-slide-up {
-  animation: slide-up 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
+/* Spring-like ease */
 .animate-scale-in {
-  animation: scale-in 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-heart-pop {
-  animation: heart-pop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-.animate-spin-slow {
-  animation: spin 8s linear infinite;
+  animation: heart-pop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 /* Components */
@@ -229,49 +248,55 @@ body {
   background-color: var(--accent);
   color: white;
   font-weight: 600;
-  padding: 7px 16px;
+  padding: 8px 18px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  transition: opacity 0.2s, transform 0.1s;
+  transition: all 0.2s;
   font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 149, 246, 0.2);
+  /* Glow effect */
 }
 
 .btn-primary:hover {
-  opacity: 0.9;
+  background-color: var(--accent-hover);
+  box-shadow: 0 6px 16px rgba(0, 149, 246, 0.3);
+  transform: translateY(-1px);
 }
 
 .btn-primary:active {
-  transform: scale(0.98);
+  transform: scale(0.98) translateY(0);
 }
 
 .btn-primary:disabled {
   opacity: 0.5;
   cursor: default;
+  box-shadow: none;
 }
 
 .input {
-  background-color: #1a1a1a;
-  border: 1px solid #363636;
-  border-radius: 6px;
-  /* Slightly tighter radius */
-  padding: 9px 12px;
+  background-color: #121212;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  padding: 10px 14px;
   color: var(--foreground);
-  font-size: 14px;
+  font-size: 15px;
+  /* Better readability */
   width: 100%;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .input:focus {
   outline: none;
   border-color: var(--muted);
+  background-color: #000;
 }
 
 .input::placeholder {
-  color: var(--muted);
+  color: #52525b;
 }
 
-/* Layout Utilities */
+/* Utilities */
 .aspect-square {
   aspect-ratio: 1 / 1;
 }
@@ -284,27 +309,17 @@ body {
   padding-top: env(safe-area-inset-top, 0px);
 }
 
-/* Touch Interactions */
+/* Touch */
 button,
 a {
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
 
-/* Skeleton Enhancements */
+/* Skeleton */
 .skeleton {
-  background: linear-gradient(90deg, #1a1a1a 0%, #262626 50%, #1a1a1a 100%);
+  background: linear-gradient(90deg, #18181b 0%, #27272a 50%, #18181b 100%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite linear;
-  border-radius: 4px;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-
-  100% {
-    background-position: 200% 0;
-  }
+  border-radius: 6px;
 }
