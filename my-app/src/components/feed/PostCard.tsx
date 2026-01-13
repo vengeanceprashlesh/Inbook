@@ -101,30 +101,36 @@ export function PostCard({
     };
 
     return (
-        <article className="border-b border-[#262626] animate-fade-in pb-4 md:mb-4 md:pb-0">
+        <article className="border-b border-[#262626] animate-fade-in pb-4 md:pb-5">
             {/* Header */}
             <header className="flex items-center justify-between px-3 py-3">
                 <div className="flex items-center gap-3">
-                    <Avatar
-                        src={post.author?.avatarUrl}
-                        alt={post.author?.username}
-                        size="sm"
-                        hasStory={false}
-                    />
-                    <div className="flex flex-col">
+                    <div className="p-[2px] rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7]">
+                        <div className="bg-black p-[2px] rounded-full">
+                            <Avatar
+                                src={post.author?.avatarUrl}
+                                alt={post.author?.username}
+                                size="sm"
+                                hasStory={false}
+                                className="w-8 h-8"
+                            />
+                        </div>
+                    </div>
+                    <div className="flex flex-col -gap-0.5">
                         <div className="flex items-center gap-1 group">
                             <Link
                                 href={`/profile/${post.author?.username}`}
-                                className="font-semibold text-sm hover:opacity-70 transition-opacity"
+                                className="font-semibold text-sm hover:opacity-70 transition-opacity flex items-center gap-1"
                             >
                                 {post.author?.username}
+                                {post.author?.isVerified && (
+                                    <BadgeCheck size={12} className="text-[#0095f6] fill-[#0095f6]" />
+                                )}
                             </Link>
-                            {post.author?.isVerified && (
-                                <BadgeCheck size={14} className="text-[#0095f6] fill-[#0095f6]" />
-                            )}
+                            <span className="text-[var(--muted)] text-xs">• {formatDistanceToNow(post.createdAt, { addSuffix: false }).replace("about ", "").replace(" hours", "h").replace(" hour", "h").replace(" minutes", "m").replace(" minute", "m")}</span>
                         </div>
                         {post.location && (
-                            <span className="text-xs text-[var(--muted)]">{post.location}</span>
+                            <span className="text-xs text-[var(--muted)] -mt-0.5">{post.location}</span>
                         )}
                     </div>
                 </div>
@@ -133,9 +139,9 @@ export function PostCard({
                 </button>
             </header>
 
-            {/* Image */}
+            {/* Image (Aspect Ratio 4:5 for standard IG look) */}
             <div
-                className="relative aspect-square bg-[#1a1a1a] double-tap-area overflow-hidden"
+                className="relative aspect-[4/5] bg-[#1a1a1a] double-tap-area overflow-hidden rounded-[4px] border border-[#262626]"
                 onClick={handleDoubleTap}
             >
                 <Image
@@ -146,6 +152,7 @@ export function PostCard({
                     sizes="(max-width: 768px) 100vw, 470px"
                     priority
                 />
+
                 {/* Heart animation overlay */}
                 {showHeartAnimation && (
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
@@ -169,15 +176,15 @@ export function PostCard({
                         >
                             <Heart
                                 size={24}
-                                className={isLiked ? "text-[#ed4956] fill-[#ed4956]" : ""}
-                                strokeWidth={isLiked ? 0 : 1.75}
+                                className={isLiked ? "text-[#ff3040] fill-[#ff3040]" : "text-white"}
+                                strokeWidth={isLiked ? 0 : 2}
                             />
                         </button>
                         <Link href={`/p/${post._id}`} className="hover:opacity-60 transition-opacity">
-                            <MessageCircle size={24} strokeWidth={1.75} />
+                            <MessageCircle size={24} strokeWidth={2} className="text-white -rotate-90" style={{ transform: "scaleX(-1)" }} />
                         </Link>
                         <button className="hover:opacity-60 transition-opacity">
-                            <Send size={24} strokeWidth={1.75} />
+                            <Send size={24} strokeWidth={2} className="text-white" />
                         </button>
                     </div>
                     <button
@@ -186,44 +193,51 @@ export function PostCard({
                     >
                         <Bookmark
                             size={24}
-                            className={isSaved ? "fill-white" : ""}
-                            strokeWidth={1.75}
+                            className={isSaved ? "fill-white text-white" : "text-white"}
+                            strokeWidth={2}
                         />
                     </button>
                 </div>
 
                 {/* Likes count */}
-                <button className="font-semibold text-sm hover:opacity-70 transition-opacity">
+                <div className="font-semibold text-sm mb-2">
                     {likesCount.toLocaleString()} likes
-                </button>
+                </div>
 
                 {/* Caption */}
                 {post.caption && (
-                    <div className="text-sm mt-2 leading-tight">
+                    <div className="text-sm mb-2 leading-snug">
                         <Link
                             href={`/profile/${post.author?.username}`}
                             className="font-semibold mr-2 hover:opacity-70 transition-opacity"
                         >
                             {post.author?.username}
                         </Link>
-                        <span className="text-[#f5f5f5] leading-normal">{post.caption}</span>
+                        <span className="text-[#f5f5f5]">{post.caption}</span>
                     </div>
                 )}
 
                 {/* Comments link */}
-                {post.commentsCount > 0 && (
+                <div className="mb-2">
                     <Link
                         href={`/p/${post._id}`}
-                        className="text-sm text-[var(--muted)] mt-2 block hover:opacity-70 transition-opacity"
+                        className="text-sm text-[var(--muted)] cursor-pointer hover:text-[#a8a8a8] transition-colors"
                     >
                         View all {post.commentsCount} comments
                     </Link>
-                )}
+                </div>
 
-                {/* Time */}
-                <time className="text-[10px] text-[var(--muted)] uppercase mt-2 block">
-                    {formatDistanceToNow(post.createdAt, { addSuffix: true })}
-                </time>
+                {/* Add Comment Input */}
+                <div className="flex items-center justify-between border-b border-transparent focus-within:border-[#262626] pb-2">
+                    <input
+                        type="text"
+                        placeholder="Add a comment..."
+                        className="bg-transparent text-sm w-full focus:outline-none placeholder:text-[var(--muted)]"
+                    />
+                    <button className="text-[#0095f6] text-sm font-semibold opacity-0 focus-within:opacity-100 hover:text-white transition-all transform scale-90 focus-within:scale-100">
+                        Post
+                    </button>
+                </div>
             </div>
         </article>
     );

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { Avatar } from "../ui/Avatar";
 import { Id } from "../../../convex/_generated/dataModel";
+import { useQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 
 interface StoryAuthor {
     _id: Id<"users">;
@@ -36,6 +38,7 @@ export function StoriesBar({
     onCreateStory,
 }: StoriesBarProps) {
     const scrollRef = useRef<HTMLDivElement>(null);
+    const currentUser = useQuery(api.users.getCurrentUser);
 
     return (
         <div className="border-b border-[#262626] bg-black">
@@ -46,16 +49,21 @@ export function StoriesBar({
                 {/* Your Story (Create) */}
                 <button
                     onClick={onCreateStory}
-                    className="flex flex-col items-center gap-1.5 flex-shrink-0 animate-scale-in"
+                    className="flex flex-col items-center gap-1 flex-shrink-0 animate-scale-in group"
                     style={{ animationDelay: "0ms" }}
                 >
-                    <div className="relative">
-                        <Avatar src={undefined} alt="Your story" size="lg" />
-                        <div className="absolute -bottom-0.5 -right-0.5 w-6 h-6 bg-[#0095f6] rounded-full flex items-center justify-center border-[2.5px] border-black">
-                            <Plus size={12} strokeWidth={3} className="text-white" />
+                    <div className="relative p-[3px]">
+                        <Avatar
+                            src={currentUser?.avatarUrl}
+                            alt="Your story"
+                            size="xl"
+                            className="bg-[#262626]"
+                        />
+                        <div className="absolute bottom-1 right-1 w-6 h-6 bg-[#0095f6] rounded-full flex items-center justify-center border-[2.5px] border-black transition-transform group-hover:scale-110">
+                            <Plus size={14} strokeWidth={3} className="text-white" />
                         </div>
                     </div>
-                    <span className="text-xs text-[#f5f5f5] max-w-[70px] truncate leading-tight">
+                    <span className="text-xs text-[#f5f5f5] max-w-[74px] truncate leading-tight">
                         Your story
                     </span>
                 </button>
@@ -65,7 +73,7 @@ export function StoriesBar({
                     <Link
                         key={group.author._id}
                         href={`/stories/${group.author.username}`}
-                        className="flex flex-col items-center gap-1.5 flex-shrink-0 animate-scale-in active:opacity-70 transition-opacity"
+                        className="flex flex-col items-center gap-1 flex-shrink-0 animate-scale-in active:opacity-70 transition-opacity"
                         style={{ animationDelay: `${(index + 1) * 50}ms` }}
                         onClick={(e) => {
                             if (onStoryClick) {
@@ -77,11 +85,11 @@ export function StoriesBar({
                         <Avatar
                             src={group.author.avatarUrl}
                             alt={group.author.username}
-                            size="lg"
+                            size="xl"
                             hasStory
                             storyViewed={false}
                         />
-                        <span className="text-xs text-[#f5f5f5] max-w-[70px] truncate leading-tight">
+                        <span className="text-xs text-[#f5f5f5] max-w-[74px] truncate leading-tight">
                             {group.author.username}
                         </span>
                     </Link>
@@ -98,7 +106,7 @@ export function StoriesBarSkeleton() {
             <div className="flex gap-4 px-4 py-4 overflow-x-auto hide-scrollbar">
                 {Array.from({ length: 8 }).map((_, i) => (
                     <div key={i} className="flex flex-col items-center gap-1.5 flex-shrink-0">
-                        <div className="w-[70px] h-[70px] rounded-full skeleton" />
+                        <div className="w-[74px] h-[74px] rounded-full skeleton" />
                         <div className="w-16 h-2 skeleton" />
                     </div>
                 ))}

@@ -28,7 +28,7 @@ const sidebarItems = [
     { href: "/explore", icon: Search, label: "Search" },
     { href: "/explore", icon: Compass, label: "Explore" },
     { href: "/reels", icon: Film, label: "Reels" },
-    { href: "/messages", icon: MessageCircle, label: "Messages" },
+    { href: "/messages", icon: MessageCircle, label: "Messages", badge: "5" },
     { href: "/notifications", icon: Heart, label: "Notifications" },
     { href: "/create", icon: PlusSquare, label: "Create" },
     { href: "/profile", icon: User, label: "Profile" },
@@ -67,29 +67,24 @@ export function Sidebar() {
     const pathname = usePathname();
 
     return (
-        <aside className="hidden md:flex sticky top-0 h-screen w-[72px] xl:w-[280px] flex-col py-8 px-4 border-r border-white/10 bg-black/95 backdrop-blur-xl z-50">
+        <aside className="hidden md:flex sticky top-0 h-screen w-[72px] xl:w-[244px] flex-col py-8 px-3 border-r border-[#262626] bg-black z-50 transition-width duration-300">
             {/* Logo */}
-            <Link href="/" className="px-2 mb-10 block group">
-                <span className="hidden xl:block text-3xl font-bold tracking-tighter instagram-gradient-text transition-all duration-300 group-hover:opacity-80">
-                    Inbook
+            <Link href="/" className="px-3 mb-8 block group">
+                {/* Desktop Logo */}
+                <span className="hidden xl:block text-[24px] font-medium tracking-tight instagram-logo-font group-hover:opacity-60 transition-opacity mt-2">
+                    Instagram
                 </span>
-                <span className="xl:hidden group-hover:scale-110 transition-transform block p-2">
-                    <svg aria-label="Instagram" fill="url(#instagramGradient)" height="28" role="img" viewBox="0 0 24 24" width="28">
-                        <defs>
-                            <linearGradient id="instagramGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stopColor="#f09433" />
-                                <stop offset="25%" stopColor="#e6683c" />
-                                <stop offset="50%" stopColor="#dc2743" />
-                                <stop offset="100%" stopColor="#bc1888" />
-                            </linearGradient>
-                        </defs>
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                {/* Icon Logo */}
+                <span className="xl:hidden group-hover:scale-105 transition-transform block mt-1">
+                    <svg aria-label="Instagram" fill="white" height="24" role="img" viewBox="0 0 24 24" width="24">
+                        <title>Instagram</title>
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.665-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                     </svg>
                 </span>
             </Link>
 
             {/* Nav items */}
-            <nav className="flex-1 space-y-2">
+            <nav className="flex-1 space-y-1">
                 {sidebarItems.map((item) => {
                     const Icon = item.icon;
                     const isActive = pathname === item.href;
@@ -97,20 +92,32 @@ export function Sidebar() {
                         <Link
                             key={item.label}
                             href={item.href}
-                            className={`relative group flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-200 
-                                ${isActive
-                                    ? "font-bold text-white bg-white/10"
-                                    : "text-[#f5f5f5] hover:bg-white/5 hover:translate-x-1"
-                                }`}
+                            className={`group flex items-center gap-4 px-3 py-3 rounded-lg transition-transform md:justify-center xl:justify-start
+                                hover:bg-white/10
+                            `}
                         >
-                            <Icon
-                                size={26}
-                                strokeWidth={isActive ? 2.5 : 1.5}
-                                className={`transition-transform duration-300 group-hover:scale-110 ${isActive ? "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" : "text-white"}`}
-                            />
-                            <span className={`hidden xl:block text-[15px] tracking-wide transition-all ${isActive ? "font-bold" : "font-medium"}`}>
+                            <div className="relative">
+                                <Icon
+                                    size={24}
+                                    strokeWidth={isActive ? 3 : 2}
+                                    className={`transition-transform duration-300 group-hover:scale-105 ${isActive ? "text-white" : "text-white"}`}
+                                />
+                                {/* Red Dot for Collapsed Mode (Messages) */}
+                                {item.badge && (
+                                    <div className="xl:hidden absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#ff3040] rounded-full ring-2 ring-black" />
+                                )}
+                            </div>
+
+                            <span className={`hidden xl:block text-[16px] transition-all ${isActive ? "font-bold" : "font-normal"}`}>
                                 {item.label}
                             </span>
+
+                            {/* Badge for Expanded Mode */}
+                            {item.badge && (
+                                <div className="hidden xl:flex ml-auto bg-[#ff3040] text-white text-[11px] font-bold px-2 h-[18px] items-center justify-center rounded-full">
+                                    {item.badge}
+                                </div>
+                            )}
                         </Link>
                     );
                 })}

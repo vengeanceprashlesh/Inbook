@@ -18,7 +18,7 @@ const sizeClasses = {
     sm: "w-8 h-8",
     md: "w-11 h-11",
     lg: "w-14 h-14",
-    xl: "w-20 h-20",
+    xl: "w-[74px] h-[74px]", // Standard Story size ~72-74px
 };
 
 const storySizes = {
@@ -26,7 +26,7 @@ const storySizes = {
     sm: "p-[2px]",
     md: "p-[2px]",
     lg: "p-[2.5px]",
-    xl: "p-[3px]",
+    xl: "p-[2.5px]",
 };
 
 export function Avatar({
