@@ -3,8 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, MessageCircle, Send, Bookmark, MoreHorizontal, Smile } from "lucide-react";
-import { Avatar } from "../ui/Avatar";
+import { Heart, MessageCircle, Send, Bookmark, MoreHorizontal } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { Id } from "../../../convex/_generated/dataModel";
 
@@ -15,7 +14,6 @@ interface Post {
         username: string;
         displayName: string;
         avatarUrl?: string;
-        isVerified?: boolean;
     };
     imageUrl: string;
     caption?: string;
@@ -25,17 +23,11 @@ interface Post {
     createdAt: number;
 }
 
-interface PostCardProps {
-    post: Post;
-    currentUserId?: Id<"users">;
-}
-
-export function PostCard({ post, currentUserId }: PostCardProps) {
+export function PostCard({ post }: { post: Post; currentUserId?: Id<"users"> }) {
     const [isLiked, setIsLiked] = useState(false);
     const [isSaved, setIsSaved] = useState(false);
     const [likesCount, setLikesCount] = useState(post.likesCount);
     const [showHeartAnimation, setShowHeartAnimation] = useState(false);
-    const [comment, setComment] = useState("");
 
     const handleLikeToggle = () => {
         setIsLiked(!isLiked);
@@ -52,60 +44,46 @@ export function PostCard({ post, currentUserId }: PostCardProps) {
     };
 
     return (
-        <article className="bg-white dark:bg-black border border-[#DBDBDB] dark:border-[#262626] rounded-lg mb-4">
+        <article className="bg-white border border-[#DBDBDB] rounded-lg mb-4">
             {/* Header */}
-            <header className="flex items-center justify-between px-4 py-3">
-                <div className="flex items-center gap-3">
-                    <Link href={`/profile/${post.author.username}`}>
-                        <div className="w-8 h-8 rounded-full overflow-hidden border border-[#DBDBDB] dark:border-[#262626]">
-                            {post.author.avatarUrl ? (
-                                <img
-                                    src={post.author.avatarUrl}
-                                    alt={post.author.username}
-                                    className="w-full h-full object-cover"
-                                />
-                            ) : (
-                                <div className="w-full h-full bg-gray-300 dark:bg-gray-700" />
-                            )}
-                        </div>
-                    </Link>
-                    <div className="flex flex-col">
-                        <div className="flex items-center gap-1">
-                            <Link
-                                href={`/profile/${post.author.username}`}
-                                className="font-semibold text-sm hover:opacity-50"
-                            >
-                                {post.author.username}
-                            </Link>
-                            {post.location && (
-                                <>
-                                    <span className="text-[#737373] text-sm">•</span>
-                                    <span className="text-[#737373] text-sm">{post.location}</span>
-                                </>
-                            )}
-                        </div>
+            <header className="flex items-center justify-between p-4">
+                <Link href={`/profile/${post.author.username}`} className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full overflow-hidden border border-[#DBDBDB]">
+                        {post.author.avatarUrl ? (
+                            <img
+                                src={post.author.avatarUrl}
+                                alt={post.author.username}
+                                className="w-full h-full object-cover"
+                            />
+                        ) : (
+                            <div className="w-full h-full bg-gray-300" />
+                        )}
                     </div>
-                </div>
-                <button className="p-2 hover:opacity-50">
+                    <div>
+                        <p className="font-semibold text-sm">{post.author.username}</p>
+                        {post.location && (
+                            <p className="text-xs text-[#8E8E8E]">{post.location}</p>
+                        )}
+                    </div>
+                </Link>
+                <button className="p-2">
                     <MoreHorizontal size={24} />
                 </button>
             </header>
 
             {/* Image */}
             <div
-                className="relative aspect-square bg-[#F5F5F5] dark:bg-[#0a0a0a] cursor-pointer select-none"
+                className="relative aspect-square bg-gray-100 cursor-pointer"
                 onDoubleClick={handleDoubleTap}
             >
                 <Image
                     src={post.imageUrl}
-                    alt={post.caption || "Post image"}
+                    alt={post.caption || "Post"}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 630px"
-                    priority
+                    sizes="630px"
                 />
 
-                {/* Heart animation */}
                 {showHeartAnimation && (
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
                         <Heart
@@ -119,89 +97,71 @@ export function PostCard({ post, currentUserId }: PostCardProps) {
             </div>
 
             {/* Actions */}
-            <div className="px-4">
-                <div className="flex items-center justify-between py-2">
+            <div className="p-4">
+                <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-4">
-                        <button
-                            onClick={handleLikeToggle}
-                            className="hover:opacity-50 transition-opacity"
-                        >
+                        <button onClick={handleLikeToggle} className="hover:opacity-50">
                             <Heart
                                 size={24}
                                 className={isLiked ? "text-[#ED4956] fill-[#ED4956]" : ""}
-                                strokeWidth={1.5}
+                                strokeWidth={1.75}
                             />
                         </button>
-                        <Link href={`/p/${post._id}`} className="hover:opacity-50 transition-opacity">
-                            <MessageCircle size={24} strokeWidth={1.5} />
+                        <Link href={`/p/${post._id}`} className="hover:opacity-50">
+                            <MessageCircle size={24} strokeWidth={1.75} />
                         </Link>
-                        <button className="hover:opacity-50 transition-opacity">
-                            <Send size={24} strokeWidth={1.5} />
+                        <button className="hover:opacity-50">
+                            <Send size={24} strokeWidth={1.75} />
                         </button>
                     </div>
-                    <button
-                        onClick={() => setIsSaved(!isSaved)}
-                        className="hover:opacity-50 transition-opacity"
-                    >
+                    <button onClick={() => setIsSaved(!isSaved)} className="hover:opacity-50">
                         <Bookmark
                             size={24}
                             className={isSaved ? "fill-current" : ""}
-                            strokeWidth={1.5}
+                            strokeWidth={1.75}
                         />
                     </button>
                 </div>
 
                 {/* Likes */}
-                <button className="font-semibold text-sm mb-2 hover:opacity-50">
+                <button className="font-semibold text-sm mb-2">
                     {likesCount.toLocaleString()} likes
                 </button>
 
                 {/* Caption */}
                 {post.caption && (
                     <div className="text-sm mb-2">
-                        <Link
-                            href={`/profile/${post.author.username}`}
-                            className="font-semibold mr-2 hover:opacity-50"
-                        >
+                        <Link href={`/profile/${post.author.username}`} className="font-semibold mr-2">
                             {post.author.username}
                         </Link>
                         <span>{post.caption}</span>
                     </div>
                 )}
 
-                {/* View Comments */}
+                {/* Comments */}
                 {post.commentsCount > 0 && (
                     <Link
                         href={`/p/${post._id}`}
-                        className="text-sm text-[#737373] mb-2 block hover:opacity-50"
+                        className="text-sm text-[#8E8E8E] mb-2 block"
                     >
                         View all {post.commentsCount} comments
                     </Link>
                 )}
 
                 {/* Time */}
-                <time className="text-xs text-[#737373] block mb-3">
+                <time className="text-xs text-[#8E8E8E] uppercase block">
                     {formatDistanceToNow(post.createdAt, { addSuffix: true })}
                 </time>
+            </div>
 
-                {/* Add Comment */}
-                <div className="flex items-center gap-2 pt-2 pb-3 border-t border-[#EFEFEF] dark:border-[#262626]">
-                    <button className="hover:opacity-50">
-                        <Smile size={20} className="text-[#262626] dark:text-white" />
-                    </button>
-                    <input
-                        type="text"
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                        placeholder="Add a comment..."
-                        className="flex-1 bg-transparent border-none outline-none text-sm placeholder:text-[#737373]"
-                    />
-                    {comment && (
-                        <button className="text-[#0095F6] font-semibold text-sm hover:opacity-50">
-                            Post
-                        </button>
-                    )}
-                </div>
+            {/* Add Comment */}
+            <div className="flex items-center gap-2 p-4 border-t border-[#EFEFEF]">
+                <input
+                    type="text"
+                    placeholder="Add a comment..."
+                    className="flex-1 bg-transparent border-none outline-none text-sm placeholder:text-[#8E8E8E]"
+                />
+                <button className="text-[#0095F6] font-semibold text-sm">Post</button>
             </div>
         </article>
     );
@@ -209,8 +169,8 @@ export function PostCard({ post, currentUserId }: PostCardProps) {
 
 export function PostCardSkeleton() {
     return (
-        <article className="bg-white dark:bg-black border border-[#DBDBDB] dark:border-[#262626] rounded-lg mb-4">
-            <header className="flex items-center gap-3 px-4 py-3">
+        <article className="bg-white border border-[#DBDBDB] rounded-lg mb-4">
+            <header className="flex items-center gap-3 p-4">
                 <div className="w-8 h-8 rounded-full skeleton" />
                 <div className="flex-1">
                     <div className="w-24 h-3 skeleton mb-2" />
@@ -218,7 +178,7 @@ export function PostCardSkeleton() {
                 </div>
             </header>
             <div className="aspect-square skeleton" />
-            <div className="px-4 py-3">
+            <div className="p-4">
                 <div className="w-20 h-3 skeleton mb-2" />
                 <div className="w-full h-3 skeleton mb-2" />
                 <div className="w-32 h-2 skeleton" />
