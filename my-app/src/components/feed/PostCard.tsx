@@ -44,9 +44,9 @@ export function PostCard({ post }: { post: Post; currentUserId?: Id<"users"> }) 
     };
 
     return (
-        <article className="bg-white border border-[#DBDBDB] rounded-lg mb-4">
+        <article className="bg-white border border-[#DBDBDB] rounded-lg mb-3">
             {/* Header */}
-            <header className="flex items-center justify-between p-4">
+            <header className="flex items-center justify-between px-3 py-3">
                 <Link href={`/profile/${post.author.username}`} className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full overflow-hidden border border-[#DBDBDB]">
                         {post.author.avatarUrl ? (
@@ -67,13 +67,13 @@ export function PostCard({ post }: { post: Post; currentUserId?: Id<"users"> }) 
                     </div>
                 </Link>
                 <button className="p-2">
-                    <MoreHorizontal size={24} />
+                    <MoreHorizontal size={20} />
                 </button>
             </header>
 
-            {/* Image */}
+            {/* Image - FIXED: Smaller, proper aspect ratio */}
             <div
-                className="relative aspect-square bg-gray-100 cursor-pointer"
+                className="relative w-full aspect-square bg-gray-100 cursor-pointer"
                 onDoubleClick={handleDoubleTap}
             >
                 <Image
@@ -81,13 +81,14 @@ export function PostCard({ post }: { post: Post; currentUserId?: Id<"users"> }) 
                     alt={post.caption || "Post"}
                     fill
                     className="object-cover"
-                    sizes="630px"
+                    sizes="(max-width: 768px) 100vw, 470px"
+                    priority={false}
                 />
 
                 {showHeartAnimation && (
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
                         <Heart
-                            size={100}
+                            size={80}
                             className="text-white fill-white animate-heart-pop"
                             strokeWidth={0}
                             style={{ filter: "drop-shadow(0 0 10px rgba(0,0,0,0.5))" }}
@@ -97,40 +98,40 @@ export function PostCard({ post }: { post: Post; currentUserId?: Id<"users"> }) 
             </div>
 
             {/* Actions */}
-            <div className="p-4">
-                <div className="flex items-center justify-between mb-3">
+            <div className="px-3">
+                <div className="flex items-center justify-between py-2">
                     <div className="flex items-center gap-4">
                         <button onClick={handleLikeToggle} className="hover:opacity-50">
                             <Heart
                                 size={24}
                                 className={isLiked ? "text-[#ED4956] fill-[#ED4956]" : ""}
-                                strokeWidth={1.75}
+                                strokeWidth={1.5}
                             />
                         </button>
                         <Link href={`/p/${post._id}`} className="hover:opacity-50">
-                            <MessageCircle size={24} strokeWidth={1.75} />
+                            <MessageCircle size={24} strokeWidth={1.5} />
                         </Link>
                         <button className="hover:opacity-50">
-                            <Send size={24} strokeWidth={1.75} />
+                            <Send size={24} strokeWidth={1.5} />
                         </button>
                     </div>
                     <button onClick={() => setIsSaved(!isSaved)} className="hover:opacity-50">
                         <Bookmark
                             size={24}
                             className={isSaved ? "fill-current" : ""}
-                            strokeWidth={1.75}
+                            strokeWidth={1.5}
                         />
                     </button>
                 </div>
 
                 {/* Likes */}
-                <button className="font-semibold text-sm mb-2">
+                <button className="font-semibold text-sm mb-1">
                     {likesCount.toLocaleString()} likes
                 </button>
 
                 {/* Caption */}
                 {post.caption && (
-                    <div className="text-sm mb-2">
+                    <div className="text-sm mb-1">
                         <Link href={`/profile/${post.author.username}`} className="font-semibold mr-2">
                             {post.author.username}
                         </Link>
@@ -142,26 +143,26 @@ export function PostCard({ post }: { post: Post; currentUserId?: Id<"users"> }) 
                 {post.commentsCount > 0 && (
                     <Link
                         href={`/p/${post._id}`}
-                        className="text-sm text-[#8E8E8E] mb-2 block"
+                        className="text-sm text-[#8E8E8E] mb-1 block"
                     >
                         View all {post.commentsCount} comments
                     </Link>
                 )}
 
                 {/* Time */}
-                <time className="text-xs text-[#8E8E8E] uppercase block">
+                <time className="text-xs text-[#8E8E8E] uppercase block mb-2">
                     {formatDistanceToNow(post.createdAt, { addSuffix: true })}
                 </time>
             </div>
 
             {/* Add Comment */}
-            <div className="flex items-center gap-2 p-4 border-t border-[#EFEFEF]">
+            <div className="flex items-center gap-2 px-3 py-2 border-t border-[#EFEFEF]">
                 <input
                     type="text"
                     placeholder="Add a comment..."
                     className="flex-1 bg-transparent border-none outline-none text-sm placeholder:text-[#8E8E8E]"
                 />
-                <button className="text-[#0095F6] font-semibold text-sm">Post</button>
+                <button className="text-[#0095F6] font-semibold text-sm opacity-50">Post</button>
             </div>
         </article>
     );
@@ -169,16 +170,16 @@ export function PostCard({ post }: { post: Post; currentUserId?: Id<"users"> }) 
 
 export function PostCardSkeleton() {
     return (
-        <article className="bg-white border border-[#DBDBDB] rounded-lg mb-4">
-            <header className="flex items-center gap-3 p-4">
+        <article className="bg-white border border-[#DBDBDB] rounded-lg mb-3">
+            <header className="flex items-center gap-3 px-3 py-3">
                 <div className="w-8 h-8 rounded-full skeleton" />
                 <div className="flex-1">
                     <div className="w-24 h-3 skeleton mb-2" />
                     <div className="w-16 h-2 skeleton" />
                 </div>
             </header>
-            <div className="aspect-square skeleton" />
-            <div className="p-4">
+            <div className="w-full aspect-square skeleton" />
+            <div className="px-3 py-2">
                 <div className="w-20 h-3 skeleton mb-2" />
                 <div className="w-full h-3 skeleton mb-2" />
                 <div className="w-32 h-2 skeleton" />

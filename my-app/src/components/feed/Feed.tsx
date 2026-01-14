@@ -18,9 +18,8 @@ export function Feed({ currentUserId }: FeedProps) {
     const isLoading = posts === undefined || stories === undefined;
 
     return (
-        <div className="max-w-[935px] mx-auto pt-8 px-5 flex gap-8">
-            {/* Main Feed Column */}
-            <div className="flex-1 max-w-[630px]">
+        <div className="flex justify-center pt-8 pb-20 md:pb-8">
+            <div className="w-full max-w-[470px] px-4 md:px-0">
                 {isLoading ? (
                     <>
                         <StoriesBarSkeleton />
@@ -39,8 +38,8 @@ export function Feed({ currentUserId }: FeedProps) {
                         />
 
                         {posts.length === 0 ? (
-                            <div className="text-center py-20">
-                                <p className="text-[#8E8E8E]">No posts yet. Follow people to see their posts!</p>
+                            <div className="text-center py-20 bg-white border border-[#DBDBDB] rounded">
+                                <p className="text-[#8E8E8E]">No posts yet</p>
                             </div>
                         ) : (
                             posts.map((post) => (
@@ -55,9 +54,9 @@ export function Feed({ currentUserId }: FeedProps) {
                 )}
             </div>
 
-            {/* Right Sidebar */}
-            <div className="hidden xl:block w-[319px] flex-shrink-0">
-                <div className="fixed w-[319px] pt-8">
+            {/* Right Sidebar - Hidden on small/medium, shown on XL */}
+            <div className="hidden xl:block ml-16">
+                <div className="fixed w-[319px]">
                     <RightSidebar />
                 </div>
             </div>
