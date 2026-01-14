@@ -1,50 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  /* Premium Dark Theme - Cyberpunk/OLED Inspired */
-  --background: #000000;
-  --foreground: #ffffff;
-  --card: #09090b;
-  /* Slightly lighter than black for depth */
-  --card-border: rgba(255, 255, 255, 0.08);
-  /* Quieter border */
-  --muted: #a1a1aa;
+  /* Instagram Light Theme Colors */
+  --ig-background: #FFFFFF;
+  --ig-primary-text: #000000;
+  --ig-secondary-text: #737373;
+  --ig-border: #DBDBDB;
+  --ig-primary-button: #0095F6;
+  --ig-primary-button-hover: #1877F2;
+  --ig-error: #ED4956;
+  --ig-badge: #FF3040;
 
-  /* Vibrant Accents */
-  --accent: #0095f6;
-  --accent-hover: #1877f2;
-  --danger: #ef4444;
-  --success: #10b981;
-
-  /* Glassmorphism System */
-  --glass-bg: rgba(0, 0, 0, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-highlight: rgba(255, 255, 255, 0.03);
-
-  /* Instagram Gradient - More Vibrant */
-  --gradient-start: #ff8a00;
-  --gradient-mid: #e52e71;
-  --gradient-end: #d11d1d;
-  --gradient-purple: #9b2cfa;
+  /* Instagram Dark Theme Colors */
+  --ig-dark-background: #000000;
+  --ig-dark-surface: #000000;
+  --ig-dark-border: #262626;
+  --ig-dark-primary-text: #FFFFFF;
+  --ig-dark-secondary-text: #A8A8A8;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-border: var(--card-border);
-  --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-danger: var(--danger);
-  --color-glass-bg: var(--glass-bg);
-  --color-glass-border: var(--glass-border);
-
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-
-  /* Safe Areas */
-  --spacing-safe-bottom: env(safe-area-inset-bottom);
-  --spacing-safe-top: env(safe-area-inset-top);
 }
 
 * {
@@ -57,86 +33,109 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: #FAFAFA;
+  color: var(--ig-primary-text);
   font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
   min-height: 100vh;
-  min-height: 100dvh;
-  overscroll-behavior-y: none;
   overflow-x: hidden;
-  /* Prevent horizontal scroll */
 }
 
-/* --- Utilities --- */
-
-/* Premium Glassmorphism */
-.glass {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-top: 1px solid var(--glass-border);
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: var(--ig-dark-background);
+    color: var(--ig-dark-primary-text);
+  }
 }
 
-.glass-header {
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid var(--glass-border);
+/* Instagram-specific utilities */
+.ig-container {
+  max-width: 935px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-/* Custom Gradients & Text */
-.instagram-gradient {
-  background: linear-gradient(135deg,
-      var(--gradient-start) 0%,
-      var(--gradient-mid) 40%,
-      var(--gradient-end) 70%,
-      var(--gradient-purple) 100%);
+.ig-sidebar {
+  width: 245px;
+  background: white;
+  border-right: 1px solid var(--ig-border);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  padding: 8px 12px 20px;
 }
 
-.instagram-gradient-text {
-  background: linear-gradient(135deg,
-      var(--gradient-start) 0%,
-      var(--gradient-mid) 40%,
-      var(--gradient-end) 70%,
-      var(--gradient-purple) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  display: inline-block;
-  /* Ensure gradient applies nicely */
+@media (prefers-color-scheme: dark) {
+  .ig-sidebar {
+    background: var(--ig-dark-background);
+    border-right-color: var(--ig-dark-border);
+  }
 }
 
-/* Story Rings - Exact Instagram Proportions */
+.ig-main-content {
+  margin-left: 245px;
+  padding-top: 30px;
+  min-height: 100vh;
+}
+
+.ig-feed {
+  max-width: 630px;
+  margin: 0 auto;
+}
+
+.ig-right-panel {
+  width: 319px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  padding: 30px 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Story ring gradient */
 .story-ring {
   background: linear-gradient(45deg,
-      #ffc600 0%,
-      #ff0040 50%,
-      #d300c5 100%);
+      #f09433 0%,
+      #e6683c 25%,
+      #dc2743 50%,
+      #cc2366 75%,
+      #bc1888 100%);
+  padding: 2px;
   border-radius: 50%;
+  display: inline-block;
 }
 
 .story-ring-inner {
-  background: var(--background);
-  padding: 2.5px;
-  /* Visual gap */
+  background: white;
+  padding: 2px;
   border-radius: 50%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  /* Ensure content doesn't bleed */
-  overflow: hidden;
 }
 
-.story-ring-seen {
-  background: #27272a;
-  /* Zinc-800 for seen state */
+@media (prefers-color-scheme: dark) {
+  .story-ring-inner {
+    background: var(--ig-dark-background);
+  }
 }
 
-/* Refined Scrollbars */
+/* Hide scrollbar */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom scrollbar for light mode */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -147,33 +146,33 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3f3f46;
+  background: #C7C7C7;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #52525b;
+  background: #A8A8A8;
 }
 
-.hide-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+/* Dark mode scrollbar */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb {
+    background: #3f3f46;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #52525b;
+  }
 }
 
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-/* Advanced Animations */
+/* Animations */
 @keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(10px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -196,17 +195,16 @@ body {
   }
 
   15% {
-    transform: scale(1.3);
+    transform: scale(1.2);
     opacity: 1;
   }
 
-  /* More bounce */
   30% {
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
 
   45% {
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 
   60% {
@@ -220,80 +218,121 @@ body {
   }
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-
-  100% {
-    background-position: 200% 0;
-  }
-}
-
 .animate-fade-in {
-  animation: fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fade-in 0.3s ease-out forwards;
 }
 
-/* Spring-like ease */
 .animate-scale-in {
-  animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: scale-in 0.3s ease-out forwards;
 }
 
 .animate-heart-pop {
   animation: heart-pop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-/* Components */
+/* Button styles */
 .btn-primary {
-  background-color: var(--accent);
+  background-color: var(--ig-primary-button);
   color: white;
   font-weight: 600;
-  padding: 8px 18px;
+  padding: 7px 16px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  transition: all 0.2s;
   font-size: 14px;
-  box-shadow: 0 4px 12px rgba(0, 149, 246, 0.2);
-  /* Glow effect */
+  transition: background-color 0.2s;
 }
 
 .btn-primary:hover {
-  background-color: var(--accent-hover);
-  box-shadow: 0 6px 16px rgba(0, 149, 246, 0.3);
-  transform: translateY(-1px);
+  background-color: var(--ig-primary-button-hover);
 }
 
 .btn-primary:active {
-  transform: scale(0.98) translateY(0);
+  opacity: 0.7;
 }
 
-.btn-primary:disabled {
-  opacity: 0.5;
-  cursor: default;
-  box-shadow: none;
-}
-
-.input {
-  background-color: #121212;
-  border: 1px solid #27272a;
+.btn-secondary {
+  background-color: #EFEFEF;
+  color: var(--ig-primary-text);
+  font-weight: 600;
+  padding: 7px 16px;
   border-radius: 8px;
-  padding: 10px 14px;
-  color: var(--foreground);
-  font-size: 15px;
-  /* Better readability */
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: #DBDBDB;
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-secondary {
+    background-color: #363636;
+    color: var(--ig-dark-primary-text);
+  }
+
+  .btn-secondary:hover {
+    background-color: #262626;
+  }
+}
+
+/* Input styles */
+.input {
+  background-color: #FAFAFA;
+  border: 1px solid var(--ig-border);
+  border-radius: 3px;
+  padding: 9px 8px 7px;
+  color: var(--ig-primary-text);
+  font-size: 14px;
   width: 100%;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s;
 }
 
 .input:focus {
   outline: none;
-  border-color: var(--muted);
-  background-color: #000;
+  border-color: #A8A8A8;
 }
 
 .input::placeholder {
-  color: #52525b;
+  color: #8E8E8E;
+}
+
+@media (prefers-color-scheme: dark) {
+  .input {
+    background-color: #121212;
+    border-color: var(--ig-dark-border);
+    color: var(--ig-dark-primary-text);
+  }
+
+  .input:focus {
+    border-color: var(--ig-dark-secondary-text);
+  }
+}
+
+/* Skeleton loaders */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 3px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    background: linear-gradient(90deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 /* Utilities */
@@ -301,47 +340,43 @@ body {
   aspect-ratio: 1 / 1;
 }
 
-.pb-safe {
-  padding-bottom: env(safe-area-inset-bottom, 20px);
+.aspect-portrait {
+  aspect-ratio: 4 / 5;
 }
 
-.pt-safe {
-  padding-top: env(safe-area-inset-top, 0px);
-}
-
-/* Touch */
+/* Touch interactions */
 button,
 a {
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
 
-/* Skeleton */
-.skeleton {
-  background: linear-gradient(90deg, #18181b 0%, #27272a 50%, #18181b 100%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite linear;
-  border-radius: 6px;
+/* Responsive */
+@media (max-width: 1264px) {
+  .ig-right-panel {
+    display: none;
+  }
+
+  .ig-main-content {
+    margin-left: 72px;
+  }
+
+  .ig-sidebar {
+    width: 72px;
+  }
 }
 
-/* Layout Utilities */
-.container-app {
-  width: 100%;
-  max-width: 630px;
-  /* Instagram Feed Width */
-  margin: 0 auto;
-  padding-bottom: 20px;
-}
+@media (max-width: 767px) {
+  .ig-sidebar {
+    display: none;
+  }
 
-.post-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
-}
+  .ig-main-content {
+    margin-left: 0;
+    padding-top: 0;
+  }
 
-@media (min-width: 768px) {
-  .post-grid {
-    gap: 28px;
-    /* Larger gap on desktop profile */
+  .ig-feed {
+    padding-bottom: 60px;
   }
 }
