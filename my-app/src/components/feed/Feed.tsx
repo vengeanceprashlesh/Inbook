@@ -45,9 +45,14 @@ export function Feed({ currentUserId }: FeedProps) {
             <div>
                 {posts.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
-                        <div className="text-6xl mb-4">📸</div>
-                        <h3 className="text-xl font-semibold mb-2">No posts yet</h3>
-                        <p className="text-[#a8a8a8] max-w-xs">
+                        <div className="relative mb-4">
+                            <div className="w-[60px] h-[60px] rounded-full border-2 border-white flex items-center justify-center opacity-80">
+                                <span className="text-3xl">📷</span>
+                            </div>
+                            <div className="absolute -top-1 -right-1 text-xl">✨</div>
+                        </div>
+                        <h3 className="text-xl font-bold mb-2">No posts yet</h3>
+                        <p className="text-[#a8a8a8] text-sm max-w-xs leading-5">
                             Follow some people or create your first post to see content here!
                         </p>
                     </div>

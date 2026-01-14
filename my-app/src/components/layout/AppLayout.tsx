@@ -83,26 +83,6 @@ export function Sidebar() {
                 </span>
             </Link>
 
-            {/* Floating Messages Pill */}
-            <div className="fixed bottom-6 right-6 hidden xl:flex items-center gap-3 bg-[#262626] border border-[#363636] rounded-full px-4 py-3 shadow-2xl cursor-pointer hover:bg-[#363636] transition-colors z-50 animate-fade-in">
-                <div className="relative">
-                    <MessageCircle size={24} strokeWidth={2} className="text-white" />
-                    <div className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-[#ff3040] rounded-full flex items-center justify-center text-[10px] font-bold">
-                        5
-                    </div>
-                </div>
-                <span className="font-semibold text-sm mr-1">Messages</span>
-                {/* Facepile */}
-                <div className="flex -space-x-2">
-                    {[1, 2, 3].map((i) => (
-                        <div key={i} className="w-6 h-6 rounded-full border-2 border-[#262626] bg-gray-700 overflow-hidden">
-                            {/* Placeholder avatars */}
-                            <div className="w-full h-full bg-gradient-to-tr from-gray-500 to-gray-400" />
-                        </div>
-                    ))}
-                </div>
-            </div>
-
             {/* Nav items */}
             <nav className="flex-1 space-y-1">
                 {sidebarItems.map((item) => {
