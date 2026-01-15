@@ -132,7 +132,7 @@ export function PostCard({ post }: { post: Post; currentUserId?: Id<"users"> }) 
                 {/* Caption */}
                 {post.caption && (
                     <div className="text-sm mb-1">
-                        <Link href={`/profile/${post.author.username}`} className="font-semibold mr-2">
+                        <Link href={`/profile/${post.author.username}`} className="font-semibold mr-1">
                             {post.author.username}
                         </Link>
                         <span>{post.caption}</span>
@@ -160,9 +160,18 @@ export function PostCard({ post }: { post: Post; currentUserId?: Id<"users"> }) 
                 <input
                     type="text"
                     placeholder="Add a comment..."
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
                     className="flex-1 bg-transparent border-none outline-none text-sm placeholder:text-[#8E8E8E]"
                 />
-                <button className="text-[#0095F6] font-semibold text-sm opacity-50">Post</button>
+                {comment.trim() && (
+                    <button
+                        onClick={() => setComment("")}
+                        className="text-[#0095F6] font-semibold text-sm hover:text-[#00376b]"
+                    >
+                        Post
+                    </button>
+                )}
             </div>
         </article>
     );
