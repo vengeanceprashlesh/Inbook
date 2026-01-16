@@ -28,6 +28,7 @@ export function PostCard({ post }: { post: Post; currentUserId?: Id<"users"> }) 
     const [isSaved, setIsSaved] = useState(false);
     const [likesCount, setLikesCount] = useState(post.likesCount);
     const [showHeartAnimation, setShowHeartAnimation] = useState(false);
+    const [comment, setComment] = useState("");
 
     const handleLikeToggle = () => {
         setIsLiked(!isLiked);
@@ -105,21 +106,21 @@ export function PostCard({ post }: { post: Post; currentUserId?: Id<"users"> }) 
                             <Heart
                                 size={24}
                                 className={isLiked ? "text-[#ED4956] fill-[#ED4956]" : ""}
-                                strokeWidth={1.5}
+                                strokeWidth={2}
                             />
                         </button>
                         <Link href={`/p/${post._id}`} className="hover:opacity-50">
-                            <MessageCircle size={24} strokeWidth={1.5} />
+                            <MessageCircle size={24} strokeWidth={2} />
                         </Link>
                         <button className="hover:opacity-50">
-                            <Send size={24} strokeWidth={1.5} />
+                            <Send size={24} strokeWidth={2} />
                         </button>
                     </div>
                     <button onClick={() => setIsSaved(!isSaved)} className="hover:opacity-50">
                         <Bookmark
                             size={24}
                             className={isSaved ? "fill-current" : ""}
-                            strokeWidth={1.5}
+                            strokeWidth={2}
                         />
                     </button>
                 </div>
@@ -132,9 +133,10 @@ export function PostCard({ post }: { post: Post; currentUserId?: Id<"users"> }) 
                 {/* Caption */}
                 {post.caption && (
                     <div className="text-sm mb-1">
-                        <Link href={`/profile/${post.author.username}`} className="font-semibold mr-1">
+                        <Link href={`/profile/${post.author.username}`} className="font-semibold">
                             {post.author.username}
                         </Link>
+                        {" "}
                         <span>{post.caption}</span>
                     </div>
                 )}
