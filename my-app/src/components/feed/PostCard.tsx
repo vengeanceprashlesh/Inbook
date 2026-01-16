@@ -45,7 +45,7 @@ export function PostCard({ post }: { post: Post; currentUserId?: Id<"users"> }) 
     };
 
     return (
-        <article className="bg-white border border-[#DBDBDB] rounded-lg mb-3">
+        <article className="bg-white mb-3">
             {/* Header */}
             <header className="flex items-center justify-between px-3 py-3">
                 <Link href={`/profile/${post.author.username}`} className="flex items-center gap-3">
@@ -181,7 +181,7 @@ export function PostCard({ post }: { post: Post; currentUserId?: Id<"users"> }) 
 
 export function PostCardSkeleton() {
     return (
-        <article className="bg-white border border-[#DBDBDB] rounded-lg mb-3">
+        <article className="bg-white mb-3">
             <header className="flex items-center gap-3 px-3 py-3">
                 <div className="w-8 h-8 rounded-full skeleton" />
                 <div className="flex-1">
