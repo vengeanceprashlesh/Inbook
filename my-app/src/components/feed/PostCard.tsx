@@ -45,7 +45,7 @@ export function PostCard({ post }: { post: Post; currentUserId?: Id<"users"> }) 
     };
 
     return (
-        <article className="bg-white mb-2">
+        <article className="bg-white mb-2 animate-slide-up">
             {/* Header */}
             <header className="flex items-center justify-between px-3 py-3">
                 <Link href={`/profile/${post.author.username}`} className="flex items-center gap-3">

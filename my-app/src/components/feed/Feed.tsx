@@ -55,7 +55,7 @@ export function Feed({ currentUserId }: FeedProps) {
             </div>
 
             {/* Right Sidebar - Hidden on small/medium, shown on XL */}
-            <div className="hidden xl:block ml-16">
+            <div className="hidden xl:block ml-12">
                 <div className="fixed w-[319px]">
                     <RightSidebar />
                 </div>

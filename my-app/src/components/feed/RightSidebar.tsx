@@ -46,9 +46,9 @@ export function RightSidebar() {
         <aside className="hidden xl:block ig-right-panel">
             <div className="fixed w-[319px] px-6">
                 {/* Current User */}
-                <div className="flex items-center justify-between py-6">
+                <div className="flex items-center justify-between py-8">
                     <Link href={`/profile/${currentUser.username}`} className="flex items-center gap-3 flex-1 min-w-0">
-                        <div className="w-11 h-11 rounded-full overflow-hidden border border-[#DBDBDB] dark:border-[#262626] flex-shrink-0">
+                        <div className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0">
                             {currentUser.avatarUrl ? (
                                 <img
                                     src={currentUser.avatarUrl}
@@ -80,7 +80,7 @@ export function RightSidebar() {
                 </div>
 
                 {/* Suggestions List */}
-                <div className="space-y-3 mb-8">
+                <div className="space-y-5 mb-10">
                     {suggestions.map((user) => (
                         <div key={user.username} className="flex items-center justify-between">
                             <Link href={`/profile/${user.username}`} className="flex items-center gap-3 flex-1 min-w-0">
@@ -100,7 +100,7 @@ export function RightSidebar() {
                                     <p className="text-[#737373] text-xs truncate">{user.subtitle}</p>
                                 </div>
                             </Link>
-                            <button className="text-[#0095F6] text-xs font-semibold hover:text-[#00376B] flex-shrink-0">
+                            <button className="text-[#0095F6] text-xs font-semibold hover:text-[#00376B] flex-shrink-0 transition-colors duration-200">
                                 Follow
                             </button>
                         </div>
@@ -108,7 +108,7 @@ export function RightSidebar() {
                 </div>
 
                 {/* Footer Links */}
-                <footer className="text-xs text-[#C7C7C7] space-y-4">
+                <footer className="text-[11px] text-[#C7C7C7] space-y-4 leading-relaxed">
                     <nav className="flex flex-wrap gap-x-1.5 gap-y-1">
                         {footerLinks.map((link, index) => (
                             <span key={link}>

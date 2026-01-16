@@ -38,7 +38,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                 </div>
 
                 {/* Navigation */}
-                <nav className="py-2">
+                <nav className="py-4">
                     {navItems.map((item) => {
                         const Icon = item.icon;
                         const isActive = pathname === item.href;
@@ -47,9 +47,9 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                             <Link
                                 key={item.label}
                                 href={item.href}
-                                className={`flex items-center gap-4 px-6 py-3 mb-1 transition-colors relative
+                                className={`flex items-center gap-4 px-6 py-4 transition-all duration-200
                                     ${isActive ? 'font-bold' : 'font-normal'}
-                                    hover:bg-[#FAFAFA]
+                                    hover:bg-[#FAFAFA] rounded-lg
                                 `}
                             >
                                 <Icon
@@ -69,7 +69,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                 </nav>
 
                 {/* More button */}
-                <button className="flex items-center gap-4 px-6 py-3 mt-auto hover:bg-[#FAFAFA] w-full transition-colors">
+                <button className="flex items-center gap-4 px-6 py-4 mt-auto hover:bg-[#FAFAFA] rounded-lg w-full transition-all duration-200">
                     <Menu size={26} strokeWidth={1.75} />
                     <span className="text-base">More</span>
                 </button>
