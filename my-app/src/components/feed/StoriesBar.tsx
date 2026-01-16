@@ -40,7 +40,7 @@ export function StoriesBar({
     const currentUser = useQuery(api.users.getCurrentUser);
 
     return (
-        <div className="bg-white border border-[#DBDBDB] rounded-lg p-4 mb-6">
+        <div className="bg-white py-4 mb-4">
             <div
                 ref={scrollRef}
                 className="flex gap-4 overflow-x-auto hide-scrollbar"
@@ -105,7 +105,7 @@ export function StoriesBar({
 
 export function StoriesBarSkeleton() {
     return (
-        <div className="bg-white border border-[#DBDBDB] rounded-lg p-4 mb-6">
+        <div className="bg-white py-4 mb-4">
             <div className="flex gap-4">
                 {[1, 2, 3, 4, 5, 6].map((i) => (
                     <div key={i} className="flex flex-col items-center gap-2 flex-shrink-0">

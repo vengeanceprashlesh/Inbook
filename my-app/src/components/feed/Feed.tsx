@@ -18,8 +18,8 @@ export function Feed({ currentUserId }: FeedProps) {
     const isLoading = posts === undefined || stories === undefined;
 
     return (
-        <div className="flex justify-center pt-8 pb-20 md:pb-8">
-            <div className="w-full max-w-[470px] px-4 md:px-0">
+        <div className="flex justify-center pt-6 pb-20 md:pb-8">
+            <div className="w-full max-w-[470px]">
                 {isLoading ? (
                     <>
                         <StoriesBarSkeleton />
@@ -38,7 +38,7 @@ export function Feed({ currentUserId }: FeedProps) {
                         />
 
                         {posts.length === 0 ? (
-                            <div className="text-center py-20 bg-white border border-[#DBDBDB] rounded">
+                            <div className="text-center py-20 bg-white">
                                 <p className="text-[#8E8E8E]">No posts yet</p>
                             </div>
                         ) : (
