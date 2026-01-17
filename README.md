@@ -55,12 +55,11 @@ A modern, full-featured Instagram clone built with Next.js, TypeScript, and Conv
 
 3. **Set up environment variables**
    
-   Create a `.env.local` file in the `my-app` directory:
+   Create a `.env.local` file in the root directory:
    ```env
    NEXT_PUBLIC_CONVEX_URL=your_convex_deployment_url
    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-   CLOUDINARY_API_KEY=your_cloudinary_api_key
-   CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+   NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=your_upload_preset
    ```
 
    See `env.example` for a complete reference.
@@ -93,16 +92,13 @@ A modern, full-featured Instagram clone built with Next.js, TypeScript, and Conv
 ## 📁 Project Structure
 
 ```
-my-app/
+inbook/
 ├── convex/              # Convex backend
 │   ├── schema.ts        # Database schema
 │   ├── users.ts         # User queries and mutations
 │   ├── posts.ts         # Posts queries and mutations
 │   ├── stories.ts       # Stories queries and mutations
-│   ├── comments.ts      # Comments queries and mutations
-│   ├── likes.ts         # Likes queries and mutations
-│   ├── follows.ts       # Follow system queries and mutations
-│   ├── notifications.ts # Notifications queries and mutations
+│   ├── interactions.ts  # Likes, comments, follows, saves
 │   └── seed.ts          # Database seeding
 ├── src/
 │   ├── app/             # Next.js App Router
@@ -117,8 +113,7 @@ my-app/
 │   │   └── onboarding/  # User onboarding
 │   └── components/      # React components
 │       ├── layout/      # Layout components
-│       ├── feed/        # Feed-related components
-│       ├── profile/     # Profile components
+│       ├── feed/        # Feed components
 │       └── ui/          # Reusable UI components
 ├── public/              # Static assets
 └── package.json
