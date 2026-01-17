@@ -52,7 +52,6 @@ export default function OnboardingPage() {
             router.push("/");
         } catch (err) {
             setError("Failed to create profile. Please try again.");
-            console.error(err);
         } finally {
             setIsCreating(false);
         }

@@ -45,7 +45,7 @@ A modern, full-featured Instagram clone built with Next.js, TypeScript, and Conv
 1. **Clone the repository**
    ```bash
    git clone https://github.com/yourusername/inbook.git
-   cd inbook/my-app
+   cd inbook
    ```
 
 2. **Install dependencies**

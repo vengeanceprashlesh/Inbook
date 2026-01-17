@@ -94,12 +94,12 @@ function CreateContent() {
 
             // Only upload if we have a file (not just a data URL we reusing, though here we always select file new)
             if (selectedFile) {
-                 try {
+                try {
                     imageUrl = await uploadToCloudinary(selectedFile);
-                 } catch (e: any) {
-                     alert(`Upload failed: ${e.message}. Using local preview for demo.`);
-                     // Fallback to local preview for demo if upload fails (e.g. no keys)
-                 }
+                } catch (e: any) {
+                    alert(`Upload failed: ${e.message}. Using local preview for demo.`);
+                    // Fallback to local preview for demo if upload fails (e.g. no keys)
+                }
             }
 
             if (isStory) {
@@ -117,7 +117,7 @@ function CreateContent() {
             }
             router.push("/");
         } catch (error) {
-            console.error("Failed to create:", error);
+            // Error handled silently - user will see no update on failure
         } finally {
             setIsUploading(false);
         }
