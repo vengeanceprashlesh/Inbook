@@ -235,8 +235,7 @@ See `env.example` for a complete list of required environment variables:
 
 - `NEXT_PUBLIC_CONVEX_URL` - Your Convex deployment URL
 - `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` - Cloudinary cloud name
-- `CLOUDINARY_API_KEY` - Cloudinary API key
-- `CLOUDINARY_API_SECRET` - Cloudinary API secret
+- `NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET` - Cloudinary unsigned upload preset
 
 ## 🤝 Contributing
 
