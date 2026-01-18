@@ -44,8 +44,8 @@ A modern, full-featured Instagram clone built with Next.js, TypeScript, and Conv
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/inbook.git
-   cd inbook
+   git clone <repository-url>
+   cd Inbook/my-app
    ```
 
 2. **Install dependencies**
@@ -55,7 +55,7 @@ A modern, full-featured Instagram clone built with Next.js, TypeScript, and Conv
 
 3. **Set up environment variables**
    
-   Create a `.env.local` file in the root directory:
+   Create a `.env.local` file in the `my-app` directory:
    ```env
    NEXT_PUBLIC_CONVEX_URL=your_convex_deployment_url
    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
