@@ -92,31 +92,32 @@ A modern, full-featured Instagram clone built with Next.js, TypeScript, and Conv
 ## 📁 Project Structure
 
 ```
-inbook/
-├── convex/              # Convex backend
-│   ├── schema.ts        # Database schema
-│   ├── users.ts         # User queries and mutations
-│   ├── posts.ts         # Posts queries and mutations
-│   ├── stories.ts       # Stories queries and mutations
-│   ├── interactions.ts  # Likes, comments, follows, saves
-│   └── seed.ts          # Database seeding
-├── src/
-│   ├── app/             # Next.js App Router
-│   │   ├── page.tsx     # Home feed
-│   │   ├── profile/     # User profile pages
-│   │   ├── p/[id]/      # Individual post pages
-│   │   ├── create/      # Create post page
-│   │   ├── explore/     # Explore page
-│   │   ├── reels/       # Reels page
-│   │   ├── messages/    # Messages page
-│   │   ├── notifications/ # Notifications page
-│   │   └── onboarding/  # User onboarding
-│   └── components/      # React components
-│       ├── layout/      # Layout components
-│       ├── feed/        # Feed components
-│       └── ui/          # Reusable UI components
-├── public/              # Static assets
-└── package.json
+Inbook/
+└── my-app/              # Main application directory
+    ├── convex/              # Convex backend
+    │   ├── schema.ts        # Database schema
+    │   ├── users.ts         # User queries and mutations
+    │   ├── posts.ts         # Posts queries and mutations
+    │   ├── stories.ts       # Stories queries and mutations
+    │   ├── interactions.ts  # Likes, comments, follows, saves
+    │   └── seed.ts          # Database seeding
+    ├── src/
+    │   ├── app/             # Next.js App Router
+    │   │   ├── page.tsx     # Home feed
+    │   │   ├── profile/     # User profile pages
+    │   │   ├── p/[id]/      # Individual post pages
+    │   │   ├── create/      # Create post page
+    │   │   ├── explore/     # Explore page
+    │   │   ├── reels/       # Reels page
+    │   │   ├── messages/    # Messages page
+    │   │   ├── notifications/ # Notifications page
+    │   │   └── onboarding/  # User onboarding
+    │   └── components/      # React components
+    │       ├── layout/      # Layout components
+    │       ├── feed/        # Feed components
+    │       └── ui/          # Reusable UI components
+    ├── public/              # Static assets
+    └── package.json
 ```
 
 ## 🛠️ Tech Stack
